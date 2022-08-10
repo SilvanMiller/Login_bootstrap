@@ -9,34 +9,30 @@
 const text = document.getElementById("floatingInput")
 const senha = document.getElementById("floatingPassword")
 const btn = document.getElementById("btnVldar")
-const msgLogado = document.getElementById("msgLogado")
-const logado = document.querySelector(".button")
-
 
 const regexEmail = /^[\w.-]+@[\w.-]+\.[\w]{2,}/
 const regexSenha = /^[\w.-]{2,}/
 
 text.addEventListener("input", (e) => {
     const emailValido = e.target.value
-    // console.log(regexEmail.test(emailValido))
-    
+    const msgLogado = document.getElementById("msgLogado")
+    const logado = document.querySelector(".button")
+        
     if (regexEmail.test(emailValido)) {
         document.getElementById("validoEmail").innerHTML = `O e-mail ${emailValido} é valido!`;
         btn.disabled = false
+        logado.onclick = () => {
+            msgLogado.classList.remove("d-none")
+
+            setTimeout(() => {
+                location.replace("perfil.html")
+            }, 800);
+}
     } else {
         document.getElementById("validoEmail").innerHTML = "Digite um e-mail valido para logar."
         btn.disabled = true
     }
 })
-
-logado.onclick = () => {
-    msgLogado.classList.remove("d-none")
-
-    setTimeout(() => {
-        location.replace("perfil.html")
-    }, 800);
-
-}
 
 //aqui vc testa se pode ver é ocultar a senha digitada
 function showPassword() {
